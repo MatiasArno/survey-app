@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap');
+
+* {
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+
+
+html {
+	scroll-behavior: smooth;
+
+	background: #ff416c; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to bottom,
+		#ff4b2b,
+		#ff416c
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to bottom,
+		#d6381c,
+		#ff416c
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+body {
+	height: 100dvh;
+	min-width: 375px;
+	margin: 0;
+	padding: 0;
+}
+
+body .dots {
+	position: absolute;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+
+	z-index: -1;
+}
+
+body .dots span {
+	position: relative;
+	width: 4.5px;
+	height: 4.5px;
+	background-color: #4effcde3;
+	/* box-shadow: 0 0 0 3px #ffffff44, 0 0 54px #ffffff, 0 0 100px #ffffff; */
+	animation: animate 18s linear infinite;
+	animation-duration: calc(270s / var(--i));
+}
+
+@keyframes animate {
+	0% {
+		transform: translateY(100vh) scale(0.189);
+	}
+
+	50% {
+		transform: scale(0.63);
+	}
+
+	100% {
+		transform: translateY(-50vh) scale(0.189);
+	}
+}
+
+.root {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* WELCOME PAGE */
+
+welcome-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: clamp(320px, 90%, 660px);
+	height: calc(100% - 108px);
+}
+
+.welcome__logo-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: url(./assets/murten-logo.png);
+	background-size: 243px;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	height: 163px;
+	width: 70vmin;
+}
+
+@media screen and (max-height: 600px) {
+	.welcome__logo-container {
+		display: none;
+	}
+}
+
+.welcome__form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	
+	height: fit-content;
+	width: 100%;
+}

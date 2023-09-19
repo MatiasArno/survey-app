@@ -1,0 +1,31 @@
+{
+	"name": "murten-app",
+	"version": "1.0.0",
+	"description": "Super simple SPA for human data collection",
+	"scripts": {
+		"dev:be": "tsnd --clear ./be-src/dev.ts",
+		"dev:fe": "parcel serve ./fe-src/index.html --port 54000",
+		"build:be": "tsc",
+		"build:fe": "parcel build ./fe-src/index.html",
+		"build": "npm run build:fe && npm run build:be",
+		"start": "npm run build && node ./dist/be-src/index.js"
+	},
+	"keywords": [],
+	"author": "Arno",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/cors": "2.8.14",
+		"@types/node": "20.5.9",
+		"dotenv": "16.3.1",
+		"parcel": "2.9.3",
+		"ts-node": "10.9.1",
+		"ts-node-dev": "2.0.0",
+		"typescript": "5.2.2"
+	},
+	"dependencies": {
+		"@vaadin/router": "1.7.5",
+		"cors": "2.8.5",
+		"express": "4.18.2",
+		"firebase-admin": "11.10.1"
+	}
+}
