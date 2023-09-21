@@ -3,7 +3,7 @@ import clientRouter from './routes/clients';
 import cors from 'cors';
 
 const app = express();
-const PORT = Number(process.env.PORT) ?? 45009;
+const PORT = process.env.PORT ?? 45009;
 
 // ----------------------- MIDDLEWARES ----------------------- //
 
