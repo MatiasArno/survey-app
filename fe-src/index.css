@@ -25,7 +25,7 @@ html {
 
 body {
 	height: 100dvh;
-	min-width: 375px;
+	min-width: 360px;
 }
 
 body .dots {
@@ -115,6 +115,7 @@ welcome-page, interests-page, channels-page {
 
 .interests__title, .channels__title {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: 63px;
@@ -123,5 +124,11 @@ welcome-page, interests-page, channels-page {
 .interests__title h2, .channels__title h2 {
 	color: white;
 	font-size: 30px;
+	text-align: center;
+}
+
+.iterests__title h3 {
+	color: white;
+	font-size: 10.8px;
 	text-align: center;
 }

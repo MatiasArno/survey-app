@@ -25,6 +25,7 @@ app.get('/api/status', (req, res) => {
 app.use(express.static('dist'));
 app.get('*', (req, res) => {
 	// NO ESTÁ CONFIGURADO BIEN ESTO!!!!!!!
+	// SI RECARGAN LA PAG DEVUELVE CUALQUIER COSA
 	res.send(__dirname);
 });
 

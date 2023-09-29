@@ -39,8 +39,7 @@ class WelcomeForm extends HTMLElement {
                     background-color: rgba(255, 255, 255, 0);
 					color: white;
                     text-align: center;
-					text-transform: uppercase;
-					font-size: 24px;
+					font-size: 21px;
                 }
 
 				::placeholder {
@@ -118,7 +117,7 @@ class WelcomeForm extends HTMLElement {
 	render() {
 		this.shadow.innerHTML = `
             <form class="form" autocomplete="off">
-				<input type="name" name="username" class="input-field" placeholder="N O M B R E" required>
+				<input type="name" name="username" class="input-field" placeholder="N O M B R E S" required>
                 <input type="email" name="email" class="input-field" placeholder="E M A I L" required>
                 <input type="text" name="cellphone" class="input-field" placeholder="C E L U L A R" required>
                 <input type="text" name="company" class="input-field" placeholder="E M P R E S A" required>

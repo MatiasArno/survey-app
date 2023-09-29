@@ -44,14 +44,14 @@ class InterestsForm extends HTMLElement {
 				justify-content: center;
 				align-content: flex-start;
 				width: 100%;
-				margin: 0 0 10px 0;
+				margin: 0 0 27px 0;
 			}
 
             .interests div {
 				margin: 6px;
 				padding: 9px;
 				font-family: 'Paytone One', sans-serif;
-				font-size: 21.6px;
+				font-size: 5.49vmin;
 				font-weight: bold;
 				color: #4effcde3;
 				cursor: pointer;
@@ -59,6 +59,12 @@ class InterestsForm extends HTMLElement {
 				border-radius: 5.4px; 
 				border: 3px dashed #4effcde3;
 				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			@media screen and (min-width: 720px) {
+				.interests div {
+					font-size: 36px;
+				}
 			}
 
 			#selected {
@@ -140,14 +146,15 @@ class InterestsForm extends HTMLElement {
 			<div class="main-container">
 				<div class="interests">
 					<div id=${checkInterest('Paletizado')}>Paletizado</div>
-					<div id=${checkInterest('Encajonado')}>Encajonado</div>
 					<div id=${checkInterest('Pick &amp; Place')}>Pick & Place</div>
-					<div id=${checkInterest('Transporte de cargas')}>Transporte de cargas</div>
 					<div id=${checkInterest('QA')}>QA</div>
 					<div id=${checkInterest('Trazabilidad')}>Trazabilidad</div>
-					<div id=${checkInterest('Dashboard Cloud')}>Dashboard Cloud</div>
-					<div id=${checkInterest('Asistencia remota')}>Asistencia remota</div>
-					<div id=${checkInterest('Clasificación de productos')}>Clasificación de productos</div>
+					<div id=${checkInterest('Robot Colaborativo')}>Robot Colaborativo</div>
+					<div id=${checkInterest('Robot Movil')}>Robot Movil</div>
+					<div id=${checkInterest('Grippers')}>Grippers</div>
+					<div id=${checkInterest('Lector de codigo')}>Lector de codigo</div>
+					<div id=${checkInterest('Sistemas de vision')}>Sistemas de vision</div>
+					<div id=${checkInterest('Integracion')}>Integracion</div>
 				</div>
 
 				<button type="button" class="button">
