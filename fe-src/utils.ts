@@ -4,6 +4,8 @@ interface ClientData {
 	cellphone: string;
     company: string;
     interests: string[];
+    channels: string[];
+    text: string;
 }
 
 async function sendDataToDatabase(data: ClientData) {

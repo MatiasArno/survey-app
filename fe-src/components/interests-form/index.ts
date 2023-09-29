@@ -1,6 +1,6 @@
 import state from '../../state';
-import { sendDataToDatabase } from '../../utils';
 import { Interests } from '../../state';
+import { Router } from '@vaadin/router';
 
 class InterestsForm extends HTMLElement {
 	shadow = this.attachShadow({ mode: 'open' });
@@ -33,8 +33,9 @@ class InterestsForm extends HTMLElement {
 
 			.main-container {
                 display: flex;
-				flex-direction: column;
-				height: 45dvh;
+                flex-direction: column;
+                justify-content: space-between;
+				height: 100%;
 			}
 
             .interests {
@@ -43,45 +44,83 @@ class InterestsForm extends HTMLElement {
 				justify-content: center;
 				align-content: flex-start;
 				width: 100%;
-				height: calc(100% - 54px);
+				margin: 0 0 10px 0;
 			}
 
             .interests div {
 				margin: 6px;
-				padding: 9px 18px;
-				height: fit-content;
+				padding: 9px;
 				font-family: 'Paytone One', sans-serif;
-				font-size: 33.3px;
+				font-size: 21.6px;
 				font-weight: bold;
 				color: #4effcde3;
 				cursor: pointer;
 				
-				border-radius: 6px; 
+				border-radius: 5.4px; 
 				border: 3px dashed #4effcde3;
 				background-color: rgba(255, 255, 255, 0);
 			}
 
-			.button {
-				margin: 54px 0 0 0;
-				height: 54px;
-				width: 100%;
+			#selected {
+				border: 3px solid #4effcde3;
+				background-color: rgba(255, 255, 255, 0.18);
+			}
 
+			.button {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				
 				border-radius: 9px;
 				background-color: rgb(63, 63, 63);
 				color: white;
 				font-weight: 700;
 				font-size: 1.53em;
 				border: none;
-				cursor: pointer;
+				height: 54px;
 			}
 
 			.button:hover {
 				background-color: rgb(81, 81, 81);
 			}
 
-			#selected {
-				border: 3px solid #4effcde3;
-				background-color: rgba(255, 255, 255, 0.18);
+			.arrow {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				transform: rotate(270deg);
+			}
+			
+			.arrow span {
+				width: 24.3px;
+				height: 24.3px;
+				border-bottom: 7.2px solid white;
+				border-right: 7.2px solid white;
+				transform: rotate(45deg);
+				margin: -6px;
+				animation: animate 2.7s infinite;
+			}
+			
+			.arrow span:nth-child(2) {
+				animation-delay: -0.6s;
+			}
+			
+			.arrow span:nth-child(3) {
+				animation-delay: -1.2s;
+			}
+			
+			@keyframes animate {
+				0% {
+					opacity: 0;
+					transform: rotate(45deg) translate(-20px, -20px);
+				}
+				50% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+					transform: rotate(45deg) translate(20px, 20px);
+				}
 			}
         `;
 
@@ -93,7 +132,6 @@ class InterestsForm extends HTMLElement {
 
 		const checkInterest = (interest: Interests) => {
 			const isInterestPresent = interests.indexOf(interest);
-
 			if (isInterestPresent != -1) return "selected";
 			return '';
 		};
@@ -101,19 +139,30 @@ class InterestsForm extends HTMLElement {
 		this.shadow.innerHTML = `
 			<div class="main-container">
 				<div class="interests">
-					<div id=${checkInterest('MiR')}>MiR</div>
-					<div id=${checkInterest('UR')}>UR</div>
-					<div id=${checkInterest('EXOR')}>EXOR</div>
-					<div id=${checkInterest('COGNEX')}>COGNEX</div>
-					<div id=${checkInterest('INDUSTRIA 4.0')}>INDUSTRIA 4.0</div>
-				</div>					
-				<button type="button" class="button">ENVIAR</button>
+					<div id=${checkInterest('Paletizado')}>Paletizado</div>
+					<div id=${checkInterest('Encajonado')}>Encajonado</div>
+					<div id=${checkInterest('Pick &amp; Place')}>Pick & Place</div>
+					<div id=${checkInterest('Transporte de cargas')}>Transporte de cargas</div>
+					<div id=${checkInterest('QA')}>QA</div>
+					<div id=${checkInterest('Trazabilidad')}>Trazabilidad</div>
+					<div id=${checkInterest('Dashboard Cloud')}>Dashboard Cloud</div>
+					<div id=${checkInterest('Asistencia remota')}>Asistencia remota</div>
+					<div id=${checkInterest('Clasificación de productos')}>Clasificación de productos</div>
+				</div>
+
+				<button type="button" class="button">
+					<div class="arrow">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</button>
 			</div>
         `;
 	}
 
 	sendForm() {
-		const { name, email, cellphone, company, interests } =
+		const { name, email, cellphone, company, interests, channels } =
 			state.getState() as any;
 
 		const buttonEl = this.shadow.querySelector('.button') as HTMLElement;
@@ -128,36 +177,17 @@ class InterestsForm extends HTMLElement {
 				if(interests.includes(newInterest)) {
 					const indexOfInterest = interests.indexOf(newInterest);
 					interests.splice(indexOfInterest, 1);
-					state.setState({ name, email, cellphone, company, interests });
+					state.setState({ name, email, cellphone, company, interests, channels });
 					return;
 				}
 					
 				interests.push(newInterest);
-				state.setState({ name, email, cellphone, company, interests });
+				state.setState({ name, email, cellphone, company, interests, channels });
 				return;
 			})
 		);
 
-		buttonEl.addEventListener('click', async () => {
-			const response = await sendDataToDatabase({
-				name,
-				email,
-				cellphone,
-				company,
-				interests,
-			});
-
-			if (response.status === 201) {
-				buttonEl.style.backgroundColor = '#8BC34A';
-				buttonEl.innerHTML = '¡PERFECTO!';
-			} else {
-				buttonEl.style.border = '2px solid white';
-				buttonEl.style.backgroundColor = 'rgba(255, 255, 255, 0)';
-				buttonEl.innerHTML = 'Algo salió mal...';
-			}
-
-			setTimeout(() => window.location.reload(), 2100);
-		});
+		buttonEl.addEventListener('click', async () => Router.go('/channels'));
 	}
 }
 

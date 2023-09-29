@@ -24,6 +24,7 @@ app.get('/api/status', (req, res) => {
 
 app.use(express.static('dist'));
 app.get('*', (req, res) => {
+	// NO ESTÁ CONFIGURADO BIEN ESTO!!!!!!!
 	res.send(__dirname);
 });
 

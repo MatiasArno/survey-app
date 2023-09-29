@@ -1,4 +1,5 @@
-export type Interests = "MiR" | "UR" | "COGNEX" | "EXOR" | "INDUSTRIA 4.0";
+export type Interests = string | undefined;
+export type Channels = 'Facebook' | 'Instagram' | 'Email' | 'Otros' | undefined;
 
 interface StateData {
 	name: string;
@@ -6,6 +7,7 @@ interface StateData {
 	cellphone: string;
 	company: string;
 	interests: Interests[];
+	channels: Channels[];
 }
 
 const state = {

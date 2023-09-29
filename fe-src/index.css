@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap');
 
 * {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
-
-
 
 html {
 	scroll-behavior: smooth;
@@ -26,8 +26,6 @@ html {
 body {
 	height: 100dvh;
 	min-width: 375px;
-	margin: 0;
-	padding: 0;
 }
 
 body .dots {
@@ -47,7 +45,6 @@ body .dots span {
 	width: 4.5px;
 	height: 4.5px;
 	background-color: #4effcde3;
-	/* box-shadow: 0 0 0 3px #ffffff44, 0 0 54px #ffffff, 0 0 100px #ffffff; */
 	animation: animate 18s linear infinite;
 	animation-duration: calc(270s / var(--i));
 }
@@ -79,7 +76,7 @@ body .dots span {
 
 /* WELCOME PAGE */
 
-welcome-page {
+welcome-page, interests-page, channels-page {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -107,11 +104,24 @@ welcome-page {
 	}
 }
 
-.welcome__form-container {
+.welcome__form-container, .interests__form-container, .channels__form-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	
-	height: fit-content;
+	height: 100%;
 	width: 100%;
+}
+
+.interests__title, .channels__title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 63px;
+}
+
+.interests__title h2, .channels__title h2 {
+	color: white;
+	font-size: 30px;
+	text-align: center;
 }
