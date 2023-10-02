@@ -76,7 +76,9 @@ body .dots span {
 
 /* WELCOME PAGE */
 
-welcome-page, interests-page, channels-page {
+welcome-page,
+interests-page,
+channels-page {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -104,16 +106,19 @@ welcome-page, interests-page, channels-page {
 	}
 }
 
-.welcome__form-container, .interests__form-container, .channels__form-container {
+.welcome__form-container,
+.interests__form-container,
+.channels__form-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	
+
 	height: 100%;
 	width: 100%;
 }
 
-.interests__title, .channels__title {
+.interests__title,
+.channels__title {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -121,7 +126,8 @@ welcome-page, interests-page, channels-page {
 	height: 63px;
 }
 
-.interests__title h2, .channels__title h2 {
+.interests__title h2,
+.channels__title h2 {
 	color: white;
 	font-size: 30px;
 	text-align: center;

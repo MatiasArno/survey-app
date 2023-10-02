@@ -8,6 +8,7 @@ interface StateData {
 	company: string;
 	interests: Interests[];
 	channels: Channels[];
+	isDataSent: boolean;
 }
 
 const state = {

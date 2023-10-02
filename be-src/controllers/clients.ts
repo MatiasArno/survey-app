@@ -13,7 +13,7 @@ abstract class ClientController {
 	}
 
 	static async createClient(data: any) {
-		const { name, email, cellphone, company, interests, channels, text } = data;
+		const { name, email, cellphone, company, interests, channels } = data;
 
 		if (!name || !email || !cellphone || !company)
 			return { error: 'Basic fields are required' };
@@ -29,7 +29,6 @@ abstract class ClientController {
 				company,
 				interests,
 				channels,
-				text
 			});
 
 			return { message: 'Client created' };

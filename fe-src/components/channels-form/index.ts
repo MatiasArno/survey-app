@@ -67,15 +67,15 @@ class ChannelsForm extends HTMLElement {
 				background-color: rgba(255, 255, 255, 0.18);
 			}
 
+			form {
+				width: 100%;
+			}
+
 			#hide-text {
 				display: none;
 			}
 
-			form {
-				width: 100%;
-			}
-			
-			form textarea {
+			#others-text {
 				resize: none; 
 				height: 72px;
 				width: 100%;
@@ -83,8 +83,7 @@ class ChannelsForm extends HTMLElement {
 				text-align: center;
 				padding: 18px;
 				font-size: 1.44em;
-				color: white;
-				background-color: rgba(255, 255, 255, 0.36); 
+				background-color: rgba(255, 255, 255, 0.9); 
 				margin: 9px 0;
 			}
 
@@ -104,24 +103,44 @@ class ChannelsForm extends HTMLElement {
 			.button:hover {
 				background-color: rgb(81, 81, 81);
 			}
+
+			.hide-thanks {
+				display: none;
+			}
+
+			.show-thanks {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255, 99, 71, 0.9);
+				color: white;
+				font-size: 54px;
+				font-weight: bolder;
+			}
         `;
 
 		this.shadow.appendChild(style);
 	}
 
 	render() {
-		const channels = state.getState().channels;
+		const { isDataSent } = state.getState();
+		const { channels } = state.getState() as any;
 
 		const checkChannel = (channel: Channels) => {
 			const isChannelPresent = channels.indexOf(channel);
-			if (isChannelPresent != -1) return "selected";
+			if (isChannelPresent != -1) return 'selected';
 			return '';
 		};
-		
+
 		const checkOthers = () => {
-			if (channels.indexOf('Otros') != -1) return "others-text";
-			return "hide-text";
-		}
+			if (channels.indexOf('Otros') != -1) return 'others-text';
+			return 'hide-text';
+		};
 
 		this.shadow.innerHTML = `
 			<div class="main-container">
@@ -137,12 +156,14 @@ class ChannelsForm extends HTMLElement {
 					<button type="submit" class="button">ENVIAR</button>
 				</form>
 			</div>
+
+			<div class=${isDataSent ? 'show-thanks' : 'hide-thanks'}> ¡Gracias! </div>
         `;
 	}
 
 	sendForm() {
-		const { name, email, cellphone, company, interests, channels } =
-			state.getState() as any;
+		const currentState = state.getState() as any;
+		const { channels } = currentState;
 
 		const formEl = this.shadow.querySelector('form') as HTMLFormElement;
 		const buttonEl = this.shadow.querySelector('.button') as HTMLFormElement;
@@ -154,43 +175,46 @@ class ChannelsForm extends HTMLElement {
 				const target = e.target as any;
 				const newChannel = target.innerHTML;
 
-				if(channels.includes(newChannel)) {
+				if (channels.includes(newChannel)) {
 					const indexOfChannel = channels.indexOf(newChannel);
 					channels.splice(indexOfChannel, 1);
-					state.setState({ name, email, cellphone, company, interests, channels });
+					state.setState({
+						...currentState,
+					});
 					return;
 				}
-					
+
 				channels.push(newChannel);
-				state.setState({ name, email, cellphone, company, interests, channels });
+				state.setState({
+					...currentState,
+				});
+
 				return;
 			})
 		);
 
 		formEl.addEventListener('submit', async (e) => {
 			e.preventDefault();
-			const text = formEl.text.value as string; 
+
+			const otherChannel = formEl.text.value as string;
+			channels.push(otherChannel);
 
 			const response = await sendDataToDatabase({
-				name,
-				email,
-				cellphone,
-				company,
-				interests,
-				channels,
-				text
+				...currentState,
 			});
 
 			if (response.status === 201) {
-				buttonEl.style.backgroundColor = '#8BC34A';
-				buttonEl.innerHTML = '¡GRACIAS!';
+				state.setState({
+					...currentState,
+					isDataSent: true,
+				});
 			} else {
 				buttonEl.style.border = '2px solid white';
 				buttonEl.style.backgroundColor = 'rgba(255, 255, 255, 0)';
 				buttonEl.innerHTML = 'Algo salió mal...';
 			}
 
-			setTimeout(() => Router.go('/'), 2100);
+			setTimeout(() => Router.go('/'), 5400);
 		});
 	}
 }

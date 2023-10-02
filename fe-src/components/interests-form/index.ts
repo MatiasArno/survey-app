@@ -29,12 +29,15 @@ class InterestsForm extends HTMLElement {
 			* {
 				box-sizing: border-box;
 				font-family: 'Poppins', sans-serif;
+				outline: none;
+				border: none;
 			}
 
 			.main-container {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+				align-items: center;
 				height: 100%;
 			}
 
@@ -51,7 +54,7 @@ class InterestsForm extends HTMLElement {
 				margin: 6px;
 				padding: 9px;
 				font-family: 'Paytone One', sans-serif;
-				font-size: 5.49vmin;
+				font-size: 4.86vmin;
 				font-weight: bold;
 				color: #4effcde3;
 				cursor: pointer;
@@ -71,6 +74,32 @@ class InterestsForm extends HTMLElement {
 				border: 3px solid #4effcde3;
 				background-color: rgba(255, 255, 255, 0.18);
 			}
+			
+			form {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+			}
+
+			#hide-text {
+				display: none;
+			}
+
+			#show-text {
+				position: absolute;
+				bottom: calc(50vh - 210px);
+				margin: 0;
+				resize: none; 
+				height: 240px;
+				width: 320px;
+				border-radius: 9px;
+				text-align: center;
+				padding: 18px;
+				font-size: 1.26em;
+				background-color: rgba(255, 255, 255, 0.9); 
+			}
+
 
 			.button {
 				display: flex;
@@ -84,6 +113,7 @@ class InterestsForm extends HTMLElement {
 				font-size: 1.53em;
 				border: none;
 				height: 54px;
+				width: 100%;
 			}
 
 			.button:hover {
@@ -138,41 +168,51 @@ class InterestsForm extends HTMLElement {
 
 		const checkInterest = (interest: Interests) => {
 			const isInterestPresent = interests.indexOf(interest);
-			if (isInterestPresent != -1) return "selected";
+			if (isInterestPresent != -1) return 'selected';
 			return '';
+		};
+
+		const checkMore = () => {
+			if (interests.indexOf('Mas') != -1) return 'show-text';
+			return 'hide-text';
 		};
 
 		this.shadow.innerHTML = `
 			<div class="main-container">
 				<div class="interests">
+					<div id=${checkInterest('Robot Colaborativo')}>Robot Colaborativo</div>
+					<div id=${checkInterest('QA')}>QA</div>
 					<div id=${checkInterest('Paletizado')}>Paletizado</div>
 					<div id=${checkInterest('Pick &amp; Place')}>Pick & Place</div>
-					<div id=${checkInterest('QA')}>QA</div>
 					<div id=${checkInterest('Trazabilidad')}>Trazabilidad</div>
-					<div id=${checkInterest('Robot Colaborativo')}>Robot Colaborativo</div>
-					<div id=${checkInterest('Robot Movil')}>Robot Movil</div>
 					<div id=${checkInterest('Grippers')}>Grippers</div>
+					<div id=${checkInterest('Robot Movil')}>Robot Movil</div>
 					<div id=${checkInterest('Lector de codigo')}>Lector de codigo</div>
 					<div id=${checkInterest('Sistemas de vision')}>Sistemas de vision</div>
 					<div id=${checkInterest('Integracion')}>Integracion</div>
+					<div id=${checkInterest('Mas')}>Mas</div>
 				</div>
 
-				<button type="button" class="button">
-					<div class="arrow">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</button>
+				<form>
+					<textarea name="text" autofocus id=${checkMore()}></textarea>
+					
+					<button type="submit" class="button">
+						<div class="arrow">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</button>
+				</form>
 			</div>
         `;
 	}
 
 	sendForm() {
-		const { name, email, cellphone, company, interests, channels } =
+		const { name, email, cellphone, company, interests, channels, isDataSent } =
 			state.getState() as any;
 
-		const buttonEl = this.shadow.querySelector('.button') as HTMLElement;
+		const formEl = this.shadow.querySelector('form') as HTMLFormElement;
 		const interestsButtonElements =
 			this.shadow.querySelectorAll('.interests div');
 
@@ -181,20 +221,51 @@ class InterestsForm extends HTMLElement {
 				const target = e.target as any;
 				const newInterest = target.innerHTML;
 
-				if(interests.includes(newInterest)) {
+				if (interests.includes(newInterest)) {
 					const indexOfInterest = interests.indexOf(newInterest);
 					interests.splice(indexOfInterest, 1);
-					state.setState({ name, email, cellphone, company, interests, channels });
+					state.setState({
+						name,
+						email,
+						cellphone,
+						company,
+						interests,
+						channels,
+					});
 					return;
 				}
-					
+
 				interests.push(newInterest);
-				state.setState({ name, email, cellphone, company, interests, channels });
+				state.setState({
+					name,
+					email,
+					cellphone,
+					company,
+					interests,
+					channels,
+				});
 				return;
 			})
 		);
 
-		buttonEl.addEventListener('click', async () => Router.go('/channels'));
+		formEl.addEventListener('submit', (e) => {
+			e.preventDefault();
+
+			interests.push(`Mas: ${formEl.text.value}`);
+
+			state.setState({
+				name,
+				email,
+				cellphone,
+				company,
+				interests,
+				channels,
+				isDataSent,
+			});
+
+			Router.go('/channels');
+			return;
+		});
 	}
 }
 

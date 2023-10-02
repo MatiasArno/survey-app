@@ -138,13 +138,22 @@ class WelcomeForm extends HTMLElement {
 
 		formEl.addEventListener('submit', (e) => {
 			e.preventDefault();
-			
+
 			const name = formEl.username.value;
 			const email = formEl.email.value;
 			const cellphone = formEl.cellphone.value;
 			const company = formEl.company.value;
 
-			state.setState({ name, email, cellphone, company, interests: [], channels: [] });
+			state.setState({
+				name,
+				email,
+				cellphone,
+				company,
+				interests: [],
+				channels: [],
+				isDataSent: false,
+			});
+
 			Router.go('/interests');
 		});
 	}

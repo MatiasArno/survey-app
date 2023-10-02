@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Super simple SPA for human data collection",
 	"scripts": {
-		"dev:be": "tsnd --clear ./be-src/dev.ts",
+		"dev:be": "tsnd --watch ./ --clear ./be-src/dev.ts",
 		"dev:fe": "parcel serve ./fe-src/index.html --port 54000",
 		"build:be": "tsc",
 		"build:fe": "parcel build ./fe-src/index.html",
