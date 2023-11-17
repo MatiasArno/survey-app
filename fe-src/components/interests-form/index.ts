@@ -56,12 +56,13 @@ class InterestsForm extends HTMLElement {
 				font-family: 'Paytone One', sans-serif;
 				font-size: 4.86vmin;
 				font-weight: bold;
-				color: #4effcde3;
+				color: #28e6d6;
 				cursor: pointer;
 				
 				border-radius: 5.4px; 
-				border: 3px dashed #4effcde3;
-				background-color: rgba(255, 255, 255, 0);
+				border: 3px dashed #28e6d6;
+				background-color: rgb(255, 255, 255, 0.036);
+				backdrop-filter: blur(2.07px);
 			}
 			
 			@media screen and (min-width: 720px) {
@@ -82,42 +83,25 @@ class InterestsForm extends HTMLElement {
 				width: 100%;
 			}
 
-			#hide-text {
-				display: none;
-			}
-
-			#show-text {
-				position: absolute;
-				bottom: calc(50vh - 210px);
-				margin: 0;
-				resize: none; 
-				height: 240px;
-				width: 320px;
-				border-radius: 9px;
-				text-align: center;
-				padding: 18px;
-				font-size: 1.26em;
-				background-color: rgba(255, 255, 255, 0.9); 
-			}
-
-
 			.button {
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				
 				border-radius: 9px;
-				background-color: rgb(63, 63, 63);
 				color: white;
+				background-color: rgb(255, 255, 255, 0.108);
+				backdrop-filter: blur(2.07px);
 				font-weight: 700;
 				font-size: 1.53em;
-				border: none;
+				border: 1px solid white;
 				height: 54px;
 				width: 100%;
 			}
 
 			.button:hover {
-				background-color: rgb(81, 81, 81);
+				background-color: rgb(255, 255, 255, 0.36);
+				backdrop-filter: blur(3px);
 			}
 
 			.arrow {
@@ -130,8 +114,8 @@ class InterestsForm extends HTMLElement {
 			.arrow span {
 				width: 24.3px;
 				height: 24.3px;
-				border-bottom: 7.2px solid white;
-				border-right: 7.2px solid white;
+				border-bottom: 7.2px solid #28e6d6;
+				border-right: 7.2px solid #28e6d6;
 				transform: rotate(45deg);
 				margin: -6px;
 				animation: animate 2.7s infinite;
@@ -172,11 +156,6 @@ class InterestsForm extends HTMLElement {
 			return '';
 		};
 
-		const checkMore = () => {
-			if (interests.indexOf('Mas') != -1) return 'show-text';
-			return 'hide-text';
-		};
-
 		this.shadow.innerHTML = `
 			<div class="main-container">
 				<div class="interests">
@@ -194,8 +173,6 @@ class InterestsForm extends HTMLElement {
 				</div>
 
 				<form>
-					<textarea name="text" autofocus id=${checkMore()}></textarea>
-					
 					<button type="submit" class="button">
 						<div class="arrow">
 							<span></span>
@@ -250,8 +227,6 @@ class InterestsForm extends HTMLElement {
 
 		formEl.addEventListener('submit', (e) => {
 			e.preventDefault();
-
-			interests.push(`Mas: ${formEl.text.value}`);
 
 			state.setState({
 				name,

@@ -3,3 +3,4 @@
 **/.parcel-cache
 **/.env
 **/dev.ts
+**/firebase-adminsdk-key.json

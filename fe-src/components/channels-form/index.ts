@@ -54,12 +54,13 @@ class ChannelsForm extends HTMLElement {
 				font-family: 'Paytone One', sans-serif;
 				font-size: 21.6px;
 				font-weight: bold;
-				color: #4effcde3;
+				color: #28e6d6;
 				text-align: center;
 				
 				border-radius: 5.4px; 
-				border: 3px dashed #4effcde3;
-				background-color: rgba(255, 255, 255, 0);
+				border: 3px dashed #28e6d6;
+				background-color: rgb(255, 255, 255, 0.036);
+				backdrop-filter: blur(2.07px);
 			}
 
 			#selected {
@@ -83,8 +84,11 @@ class ChannelsForm extends HTMLElement {
 				text-align: center;
 				padding: 18px;
 				font-size: 1.44em;
-				background-color: rgba(255, 255, 255, 0.9); 
 				margin: 9px 0;
+				color: rgb(255, 255, 255, 0.9);
+				border: 0.9px solid white;
+				background-color: rgb(255, 255, 255, 0.054);
+				backdrop-filter: blur(2.07px);
 			}
 
 			.button {
@@ -92,16 +96,18 @@ class ChannelsForm extends HTMLElement {
 				width: 100%;
 
 				border-radius: 9px;
-				background-color: rgb(63, 63, 63);
 				color: white;
 				font-weight: 700;
 				font-size: 1.53em;
-				border: none;
 				margin: 54px 0 0 0;
+				background-color: rgb(255, 255, 255, 0.108);
+				backdrop-filter: blur(2.07px);
+				border: 1px solid white;
 			}
 
 			.button:hover {
-				background-color: rgb(81, 81, 81);
+				background-color: rgb(255, 255, 255, 0.36);
+				backdrop-filter: blur(3px);
 			}
 
 			.hide-thanks {
@@ -117,7 +123,7 @@ class ChannelsForm extends HTMLElement {
 				align-items: center;
 				width: 100%;
 				height: 100%;
-				background-color: rgba(255, 99, 71, 0.9);
+				background-color: #1a5fde96;
 				color: white;
 				font-size: 54px;
 				font-weight: bolder;

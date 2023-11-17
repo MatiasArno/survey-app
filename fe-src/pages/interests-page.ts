@@ -11,7 +11,7 @@ class InterestsPage extends HTMLElement {
 		this.innerHTML = `
 			<div class="interests__title">
 				<h2>¿Qué te interesa?</h2>
-				<h3>Podés seleccionar varios</h3>
+				<h3 id=interests__subtitle>Podés seleccionar varios</h3>
 			</div>
 			<div class="interests__form-container">
 				<interests-form></interests-form>

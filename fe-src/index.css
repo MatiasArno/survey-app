@@ -10,17 +10,9 @@
 html {
 	scroll-behavior: smooth;
 
-	background: #ff416c; /* fallback for old browsers */
-	background: -webkit-linear-gradient(
-		to bottom,
-		#ff4b2b,
-		#ff416c
-	); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(
-		to bottom,
-		#d6381c,
-		#ff416c
-	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: #000428;
+	background: -webkit-linear-gradient(to top, #004e92, #000428);
+	background: linear-gradient(to top, #004e92, #000428);
 }
 
 body {
@@ -42,11 +34,17 @@ body .dots {
 
 body .dots span {
 	position: relative;
-	width: 4.5px;
-	height: 4.5px;
-	background-color: #4effcde3;
+	width: calc(180px / var(--i));
+	height: calc(180px / var(--i));
+	background-color: #5386e4;
 	animation: animate 18s linear infinite;
 	animation-duration: calc(270s / var(--i));
+	border-radius: 50%;
+
+	box-shadow: inset 0 0 50px #5386e4, inset 20px 0 60px #6c9fff,
+		inset -20px 0 60px #2e69d8, inset 20px 0 300px #6c9fff,
+		inset -20px 0 300px #2e69d8, 0 0 50px #5386e4, -10px 0 60px #6c9fff,
+		10px 0 60px #2e69d8;
 }
 
 @keyframes animate {
@@ -129,12 +127,12 @@ channels-page {
 .interests__title h2,
 .channels__title h2 {
 	color: white;
-	font-size: 30px;
+	font-size: 30.6px;
 	text-align: center;
 }
 
-.iterests__title h3 {
-	color: white;
-	font-size: 10.8px;
+#interests__subtitle {
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 15px;
 	text-align: center;
 }

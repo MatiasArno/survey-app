@@ -34,12 +34,13 @@ class WelcomeForm extends HTMLElement {
                 .input-field {
 					margin: 18px 0 0 0;
                     height: 54px;
-                    border: 0.9px solid white;
 					border-radius: 4.5px;
-                    background-color: rgba(255, 255, 255, 0);
 					color: white;
                     text-align: center;
 					font-size: 21px;
+                    border: 0.9px solid white;
+					background-color: rgb(255, 255, 255, 0.054);
+					backdrop-filter: blur(2.07px);
                 }
 
 				::placeholder {
@@ -57,18 +58,20 @@ class WelcomeForm extends HTMLElement {
 					align-items: center;
 					
 					border-radius: 9px;
-					background-color: rgb(63, 63, 63);
 					color: white;
 					font-weight: 700;
 					font-size: 1.53em;
-					border: none;
+					background-color: rgb(255, 255, 255, 0.108);
+					backdrop-filter: blur(2.07px);
+					border: 1px solid white;
 					
 					margin: 54px 0 0 0;
 					height: 54px;
 				}
 
 				.button:hover {
-					background-color: rgb(81, 81, 81);
+					background-color: rgb(255, 255, 255, 0.36);
+					backdrop-filter: blur(3px);
 				}
 
 				.arrow {
@@ -81,8 +84,8 @@ class WelcomeForm extends HTMLElement {
 				.arrow span {
 					width: 24.3px;
 					height: 24.3px;
-					border-bottom: 7.2px solid white;
-					border-right: 7.2px solid white;
+					border-bottom: 7.2px solid #28e6d6;
+					border-right: 7.2px solid #28e6d6;
 					transform: rotate(45deg);
 					margin: -6px;
 					animation: animate 2.7s infinite;
